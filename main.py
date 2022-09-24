@@ -24,12 +24,15 @@ put_URL = "http://127.0.0.1:8000/api/update/6/"
 import re
 import serial
 import time
-arduino = serial.Serial(port='COM9', baudrate=9600, timeout=.1)
+
+# this will only work if arduino is connected
+# arduino = serial.Serial(port='COM9', baudrate=9600, timeout=.1)
 
 prev_time=time.time()
 def write_read():
     # arduino.write(bytes(x, 'utf-8'))
     time.sleep(0.05)
+    # data = 98
     data = arduino.readline()
     return data
 
@@ -40,14 +43,12 @@ def take_temp():
     c=0
     while True:
 
-        value = write_read().decode()
-        # value=98.0
+        # value = write_read().decode()
+        value=98.0
         c+=1
         if (value):
 
             try:
-                if c>10:
-                    return 98.0
                 value = value.replace("\r\n", "")
                 if float(value) >95:
                 # if float(value) - prev < 0.001:
@@ -56,9 +57,7 @@ def take_temp():
                 # prev=float(value)
                 # print(float(value))  # printing the value
             except:
-                count+=1
-                if count >5:
-                    return 98.0
+                pass
 
     # for i in range(1):
     #     temp=98.1
@@ -69,7 +68,7 @@ def has_numbers(inputString):
     return any(char.isdigit() for char in inputString)
 
 def take_pressure():
-    cap = cv.VideoCapture(1)
+    cap = cv.VideoCapture(0)
     global prev_time
     count=0
     if not cap.isOpened():
@@ -166,6 +165,7 @@ def take_pressure():
     # return s_bp,d_bp,pul
 
 
+# this function return fixed value because the oxymeter was not available
 def take_oxy():
     oxy= 0
     for i in range(1):
@@ -175,6 +175,7 @@ def take_oxy():
     return oxy
 
 
+# this will come from separate code
 def take_exercise():
     pred= 0
 

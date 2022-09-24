@@ -51,9 +51,7 @@ class mainpage(QMainWindow):
         super(mainpage,self).__init__()
         loadUi('first_page.ui',self)
 
-        # self.health_check_img.setPixmap(QtGui.QPixmap('vital2.jpg'))
-        #
-        # self.health_check_img.show()  # You were missing this.
+
         self.im = QPixmap("vital2.webp")
         self.health_check_img.setPixmap(self.im)
         self.health_check_img.setScaledContents(True)
@@ -61,9 +59,6 @@ class mainpage(QMainWindow):
         self.im = QPixmap("exercise.jpg")
         self.exercise_img.setPixmap(self.im)
         self.exercise_img.setScaledContents(True)
-        # movie1 = QtGui.QMovie('vital2.jpg')
-        # self.health_check_img.setMovie(movie1)
-        # movie1.start()
         self.health_check.clicked.connect(self.health)
         self.exercise.clicked.connect(self.exercise_m)
 
@@ -71,12 +66,6 @@ class mainpage(QMainWindow):
 
         print("health button")
         second=health_class()
-        # file1 = open("model_name.txt", "w")
-        #
-        # # \n is placed to indicate EOL (End of Line)
-        # file1.write("1a")
-        # # file1.writelines(L)
-        # file1.close()
         widget.addWidget(second)
         widget.setCurrentIndex(widget.currentIndex()+1)
     def exercise_m(self):
@@ -91,7 +80,6 @@ class health_class(QMainWindow):
         super(health_class,self).__init__()
         loadUi('temp.ui',self)
 
-        # self.pressure_b.clicked.connect(self.pressure_m)
         self.temp_b.clicked.connect(self.label_print)
         self.temp_b.clicked.connect(self.temp_m)
         self.back_b.clicked.connect(self.back)
@@ -149,20 +137,9 @@ class pressure_class(QMainWindow):
 
             r = requests.get(url=get_URL)
             data = r.json()
-        # self.temp_thread = take_temp()
-        # self.temp_thread.start()
-        # print("Started..")
-        # self.temp_thread.temp_status.connect(self.temp_value)
+
         self.pressure_b.clicked.connect(self.oxy_m)
         self.back_b.clicked.connect(self.back)
-        # self.oxy_b.clicked.connect(self.oxy_m)
-        # self.back_b.clicked.connect(self.back)
-
-    # def temp_m(self):
-    #     # print("health button")
-    #     temp_call = temp_class()
-    #     widget.addWidget(temp_call)
-    #     widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def temp_value(self,val):
         print("Here comes")
@@ -328,18 +305,6 @@ class all_done_class(QMainWindow):
         self.score.setText("Health Condition: " + score)
 
         self.back_b.clicked.connect(self.back)
-        # data["oxygen_saturation_flag"] = 0
-        # r = requests.put(url=put_URL, data=data)
-        # self.press_t = take_oxy()
-        # self.press_t.start()
-        #
-        # self.press_t.oxy_status.connect(self.press_value)
-
-        # sys_bp = 120.0
-        # dia_bp = 80.0
-        # pulse = 60
-        # oxymeter = 98
-        # temp = 97.0
 
 
     def back(self):
